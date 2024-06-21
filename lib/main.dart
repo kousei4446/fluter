@@ -8,7 +8,7 @@ class MyApp2 extends StatelessWidget {
   const MyApp2({super.key});
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: "実践演習アプリ",
       home: MyHome(),
     );
@@ -19,15 +19,18 @@ class MyHome extends StatefulWidget {
   const MyHome({super.key});
   @override
   //_を先頭に着けてここ限定のステイト
+  // ignore: library_private_types_in_public_api
   _MyHomeState createState() {
     return _MyHomeState();
   }
 }
 
+
 // _MyHomeStateクラスがMyHomeというStatefulWidgetに
 // 対応する状態オブジェクトであることを示します。
+
 class _MyHomeState extends State<MyHome> {
-  int count = 45;
+  int count = 1000;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,16 +49,9 @@ class _MyHomeState extends State<MyHome> {
             Text("$count", style: TextStyle(fontSize: 100)),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                BinDigit(value:count,digit:7),
-                BinDigit(value:count,digit:6),
-                BinDigit(value:count,digit:5),
-                BinDigit(value:count,digit:4),
-                BinDigit(value:count,digit:3),
-                BinDigit(value:count,digit:2),
-                BinDigit(value:count,digit:1),
-                BinDigit(value:count,digit:0),
-              ],
+              children: ([10,9,8,7,6,5,4,3,2,1,0].map((i) {
+                return BinDigit(value: count, digit: i);
+              })).toList()
             ),
             Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               ElevatedButton(
